@@ -1,0 +1,38 @@
+{
+  "name": "__SLUG__-motion",
+  "version": "1.0.0",
+  "description": "__PRODUCT__ launch film (Remotion)",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.542",
+    "@remotion/google-fonts": "4.0.542",
+    "@remotion/media": "4.0.542",
+    "@remotion/transitions": "4.0.542",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.542"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "4.0.542",
+    "@remotion/eslint-config-flat": "4.0.542",
+    "@remotion/renderer": "4.0.542",
+    "@types/react": "19.3.0",
+    "@types/web": "0.0.166",
+    "eslint": "10.12.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "lint": "eslint src && tsc",
+    "score": "node scripts/score.mts",
+    "stills": "node scripts/stills.mjs wide fr && node scripts/stills.mjs tall fr",
+    "finish": "node scripts/finish.mjs",
+    "audit": "node __AUDIT__"
+  }
+}
