@@ -2,7 +2,9 @@
 // Step 0 of amir-motion: check the machine, install the skills it calls if they are missing.
 //   node <skill-dir>/scripts/doctor.mjs            check, then install what is missing
 //   node <skill-dir>/scripts/doctor.mjs --check    check only, exit 1 if something is missing
-//   node <skill-dir>/scripts/doctor.mjs --agent cursor   install for another agent (default: claude-code)
+//   node <skill-dir>/scripts/doctor.mjs --agent pi       install for these agents only (comma separated)
+// By default the skills go to Claude Code (~/.claude/skills) and Pi (~/.agents/skills, also read by Codex
+// and other agents), so the same machine works whichever agent the user opens.
 // The two skills come from their official sources, never from a copy: they stay up to date and
 // their licences stay with their authors.
 import {existsSync} from 'node:fs';
@@ -18,7 +20,7 @@ const DEPENDENCIES = [
 const args = process.argv.slice(2);
 const checkOnly = args.includes('--check');
 const agentIndex = args.indexOf('--agent');
-const agent = agentIndex >= 0 ? args[agentIndex + 1] : 'claude-code';
+const agents = agentIndex >= 0 ? args[agentIndex + 1].split(',') : ['claude-code', 'pi'];
 
 const home = os.homedir();
 const roots = [
@@ -29,6 +31,7 @@ const roots = [
 ];
 const installed = (name) => roots.some((r) => existsSync(path.join(r, name, 'SKILL.md')));
 
+console.log(`for   ${agents.join(', ')}`);
 let problems = 0;
 const [major, minor] = process.versions.node.split('.').map(Number);
 if (major > 22 || (major === 22 && minor >= 18)) console.log(`ok    node ${process.versions.node}`);
@@ -43,13 +46,13 @@ for (const dep of DEPENDENCIES) {
     continue;
   }
   if (checkOnly) {
-    console.log(`MISS  ${dep.name}: npx skills add ${dep.source} --skill ${dep.skills.join(' ')} -g -a ${agent} -y`);
+    console.log(`MISS  ${dep.name}: npx skills add ${dep.source} --skill ${dep.skills.join(' ')} -g -a ${agents.join(' ')} -y`);
     problems++;
     continue;
   }
   console.log(`get   ${dep.name} from ${dep.source}…`);
   try {
-    npx(['-y', 'skills', 'add', dep.source, '--skill', ...dep.skills, '-g', '-a', agent, '-y']);
+    npx(['-y', 'skills', 'add', dep.source, '--skill', ...dep.skills, '-g', '-a', ...agents, '-y']);
   } catch {
     // The install command printed its own error above.
   }

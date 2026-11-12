@@ -7,7 +7,9 @@ description: Use when making a launch film, product video, animated explainer, d
 
 Amir's house rules for product films. The film explains a product to a non-technical decision maker in 30 to 60 seconds: one sentence per step, the product doing the talking, sound locked to the picture, a clean cut in every format and language, and nothing in it that is not ours.
 
-`<skill-dir>` below is the folder of this file (after `npx skills add … -g`: `~/.claude/skills/amir-motion`).
+`<skill-dir>` below is the folder of this file: `~/.claude/skills/amir-motion` for Claude Code, `~/.agents/skills/amir-motion` for Pi and other agents.
+
+"Invoke a skill" below means: the Skill tool in Claude Code, `/skill:<name>` in Pi, or else read `<skills folder>/<name>/SKILL.md` and follow it.
 
 **Three skills, one film.** amir-motion owns the rules, the template, the sound and the gate. It calls two skills at fixed steps:
 
@@ -37,7 +39,7 @@ Full detail and numbers: `references/rules.md`. Where they come from: `reference
 
 ## Workflow
 
-0. **Doctor.** `node <skill-dir>/scripts/doctor.mjs`. It checks Node (22.18+) and installs `stageshow` and the Remotion skills from their official sources if they are missing. If it installed something, say so: the new skills load in the next session; meanwhile read their `SKILL.md` files directly.
+0. **Doctor.** `node <skill-dir>/scripts/doctor.mjs`. It checks Node (22.18+) and installs `stageshow` and the Remotion skills from their official sources if they are missing. It installs for Claude Code and Pi; `--agent <id>` for another agent. If it installed something, say so: the new skills load in the next session; meanwhile read their `SKILL.md` files directly.
 1. **Brief.** Fill `BRIEF.md` with the user: goal, audience, promise (≤ 8 words), formats, length, brand and its sources, proof. Then the beat sheet: one row per step (caption, what the product shows, sound). Story arc and examples: `references/brief.md`. For each product scene, plan it the stageshow way: **invoke `stageshow`** and write, per scene, the focal object, the action, the payoff, what is left out, and the closest gold example (`hero-demo`, `payout-flow`, `choreography`, `table-edit`, `loading`…). Show the beat sheet and get a yes before any scene (Amir decides the substance).
 2. **Scaffold.** **Invoke `remotion-best-practices`** and keep its router open for the whole build. Then:
    ```bash

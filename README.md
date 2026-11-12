@@ -37,6 +37,18 @@ node ~/.claude/skills/amir-motion/scripts/doctor.mjs --check
 
 Relancez Claude Code après l'installation pour que les skills se chargent.
 
+### Avec Pi
+
+```bash
+npx skills add amirlehmam/amir-motion -g -a pi -y
+node ~/.agents/skills/amir-motion/scripts/doctor.mjs
+```
+
+Le doctor installe stageshow et les skills Remotion pour Claude Code et pour Pi. Relancez Pi, puis
+`/skill:amir-motion`, ou demandez simplement « fais-moi un film de lancement pour <produit> ».
+
+Sous Windows PowerShell, écrivez `node $HOME/.agents/skills/amir-motion/scripts/doctor.mjs`.
+
 ## Utiliser
 
 Dans Claude Code : `/amir-motion`, ou simplement « fais-moi un film de lancement pour <produit> ».
