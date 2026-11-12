@@ -74,3 +74,7 @@ Sous Windows, gardez un chemin de projet court : Chrome headless ne démarre pas
 
 Remotion est gratuit pour les particuliers et les sociétés jusqu'à 3 personnes ; au-delà, il faut une
 [licence Company](https://www.remotion.dev/license).
+
+## Licence
+
+MIT, voir `LICENSE`. stageshow et les skills Remotion gardent leurs propres licences : ils ne sont pas copiés ici, ils sont installés depuis leurs dépôts.
